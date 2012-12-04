@@ -24,5 +24,7 @@ We load template data on first launch (when there is no serialized objects), thi
  The GUI kicks the user to the main menu if there are no more change requests to
  process in a given section.
  
+
+
  The GUI prevents users accessing areas where there are no change requests to 
  process for a given section.
