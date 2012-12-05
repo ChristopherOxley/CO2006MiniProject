@@ -3,11 +3,19 @@
 change to src directory in terminal;
 Run: javac CORootController.java
 
+Alternatively, you can add the src folder to a new eclipse project and run 
+from inside eclipse.
+
+
 
 // To execute
 /////////////
 Run: java CORootController
 I have also enclosed a .jar file for quick testing
+
+
+
+
 
 // Please note
 //////////////
