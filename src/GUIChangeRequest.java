@@ -13,6 +13,7 @@ public class GUIChangeRequest extends JFrame implements ActionListener, WindowLi
 	private JButton btnBack, btnMainMenu, btnSave;
 	private JTextArea txtProblem, txtSolution;
 	
+	
 	public GUIChangeRequest() {
 		// TODO Auto-generated constructor stub
 	}
@@ -135,11 +136,13 @@ public class GUIChangeRequest extends JFrame implements ActionListener, WindowLi
 		
 		if(e.getSource() == btnSave){
 		
-			ChangeRequest request = new ChangeRequest();
-			request.setProblem(this.txtProblem.getText());
-			request.setSolution(this.txtSolution.getText());
-			request.setVersion(this.baseline);
+			String problem = this.txtProblem.getText();
+			String solution = this.txtSolution.getText();
+			Baseline bl = this.baseline;
 			
+			ChangeRequest request = controller.createChangeRequest(problem, solution, bl);
+			
+
 			StringBuffer sb = new StringBuffer();
 			
 			sb.append("Suncessfully Created A New Change Request:\n");

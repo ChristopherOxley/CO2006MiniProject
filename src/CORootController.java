@@ -1,6 +1,10 @@
 
+import static org.junit.Assert.*;
+
 import java.util.*;
 import javax.swing.*;
+
+import org.junit.Test;
 
 
 public class CORootController {
@@ -26,9 +30,15 @@ public class CORootController {
 		
 		controller.print(controller.getApprovedRequests(controller.getDevelopers().get(0)));
 		
+		
 		GUIMenu menu = new GUIMenu(controller);
 		controller.getViewStack().add(menu);		
 	}
+	
+	
+
+	
+	
 	
 	// The view stack stores JFrames as they are created, this allows us to 
 	// programmatically manage each "View" hiding previous views, showing next
@@ -46,6 +56,8 @@ public class CORootController {
 		setViewStack(new Vector<JFrame>());
 		setDevelopers(new Vector<Developer>());
 	}
+	
+	
 	
 	// Class method used purely to setup a dummy controller
 	public static CORootController setupDummyData() {
@@ -119,6 +131,7 @@ public class CORootController {
 		controller.addDeveloper(dev1);
 		controller.addDeveloper(dev2);
 		controller.addDeveloper(dev3);
+		
 		
 		return controller;
 	}
@@ -254,6 +267,32 @@ public class CORootController {
 		return developers;
 	}
 
+	public ChangeRequest createChangeRequest(String problem, String solution, Baseline bl){
+		
+		ChangeRequest request = new ChangeRequest();
+		request.setProblem(problem);
+		request.setSolution(solution);
+		request.setVersion(bl);
+		return request;
+		
+	}
+	
+	public ChangeRequest approveChangeRequest(ChangeRequest req, Developer dev, String assess, String priority ){
+	
+		req.setAssessment(assess);
+		if (dev!=null) req.setDev(dev);
+		if (priority!=null) req.setPriority(priority);
+		return req;
+	}
+	
+	public ChangeRequest completeChangeRequest(ChangeRequest request){
+		
+		request.setCompletionDate(new Date());
+		
+		return request;
+		
+	}
+	
 	public void setDevelopers(Vector<Developer> developers) {
 		this.developers = developers;
 	}

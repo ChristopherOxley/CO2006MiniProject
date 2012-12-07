@@ -14,6 +14,14 @@ public class ChangeRequest implements Serializable {
 	private Developer dev;
 	private Date completionDate;
 	
+	public static final String PRIORITY_HIGH = "High";
+	public static final String PRIORITY_MEDIUM = "Medium";
+	public static final String PRIORITY_LOW = "Low";
+
+	public static final String ASSESSMENT_APPROVED = "Approved";
+	public static final String ASSESSMENT_REJECTED = "Rejected";
+
+	
 	public ChangeRequest(){
 	}
 
@@ -44,14 +52,16 @@ public class ChangeRequest implements Serializable {
 		this.problem = problem;
 	}
 	
-	// We only allow the setting of assessment indirectly to help ensure that 
-	// there are only 2 strings that can be set.
 	public void setAssessmentRejected(){
-		this.assessment = "Rejected";
+		this.assessment = ASSESSMENT_REJECTED;
 	}
 	
 	public void setAssessmentApproved(){
-		this.assessment = "Approved";
+		this.assessment = ASSESSMENT_APPROVED;
+	}
+	
+	public void setAssessment(String ass){
+		this.assessment = ass;
 	}
 	
 	public String getAssessment(){
@@ -59,7 +69,7 @@ public class ChangeRequest implements Serializable {
 	}
 
 	public boolean isApproved(){
-		return this.getAssessment().equals("Approved");
+		return this.getAssessment().equals(ASSESSMENT_APPROVED);
 	}
 	
 	public Developer getDev() {
@@ -98,15 +108,19 @@ public class ChangeRequest implements Serializable {
 	// We only allow the setting of priority indirectly to help ensure that 
 	// there are only 3 strings that can be set.
 	public void setPriorityHigh(){
-		this.priority = "High";
+		this.priority = PRIORITY_HIGH;
 	}
 	
 	public void setPriorityMedium(){
-		this.priority = "Medium";
+		this.priority = PRIORITY_MEDIUM;
 	}
 	
 	public void setPriorityLow(){
-		this.priority = "Low";
+		this.priority = PRIORITY_LOW;
+	}
+	
+	public void setPriority(String pri) {
+		this.priority = pri;
 	}
 
 	public Date getCompletionDate() {

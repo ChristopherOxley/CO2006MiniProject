@@ -224,30 +224,34 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 			}else{
 				
 				ChangeRequest request = controller.getPendingChangeRequests().get(pendingRequests.getSelectedIndex());
+				String priority=null;
+				String approval;
+				Developer developer=null;
 				
 				request.print();
 				
 				if (btnAccepted.isSelected()) {
-					Developer developer = controller.getDevelopers().get(developers.getSelectedIndex());
+					developer = controller.getDevelopers().get(developers.getSelectedIndex());
 					request.setDev(developer);
 					developer.addChangeRequest(request);
 					if (btnPriorityHigh.isSelected()) {
-						request.setPriorityHigh();
+						priority = ChangeRequest.PRIORITY_HIGH;
 					}
 					if (btnPriorityMedium.isSelected()) {
-						request.setPriorityMedium();
+						priority = ChangeRequest.PRIORITY_MEDIUM;
 					}
 					if (btnPriorityLow.isSelected()) {
-						request.setPriorityLow();
+						priority = ChangeRequest.PRIORITY_LOW;
 					}
-					request.setAssessmentApproved();
+
+					approval = ChangeRequest.ASSESSMENT_APPROVED;
 
 				}else {
-					request.setAssessmentRejected();
+					approval = ChangeRequest.ASSESSMENT_REJECTED;
 
 				}
 				
-
+				controller.approveChangeRequest(request, developer, approval, priority);
 
 				
 				

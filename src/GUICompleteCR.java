@@ -96,7 +96,7 @@ public class GUICompleteCR extends JFrame implements ActionListener {
 			if (approvedRequestsBox.getSelectedIndex() >= 0) {
 				ChangeRequest selectedRequest = controller.getApprovedRequests(developer).get(approvedRequestsBox.getSelectedIndex());
 				selectedRequest.print();
-				selectedRequest.setCompletionDate(new Date());
+				controller.completeChangeRequest(selectedRequest);
 				selectedRequest.print();
 			}
 
