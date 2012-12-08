@@ -49,7 +49,7 @@ public class GUICompleteCR extends JFrame implements ActionListener {
 
 		
 		approvedRequestsBox = new JComboBox(reqStub);
-		approvedRequestsBox.setSelectedIndex(-1);
+		approvedRequestsBox.setSelectedIndex(0);
 		approvedRequestsBox.addActionListener(this);
 	
 		

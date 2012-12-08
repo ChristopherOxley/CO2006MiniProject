@@ -277,11 +277,12 @@ public class CORootController {
 		
 	}
 	
-	public ChangeRequest approveChangeRequest(ChangeRequest req, Developer dev, String assess, String priority ){
+	public ChangeRequest approveChangeRequest(ChangeRequest req, Developer dev, String assess, String priority, Date deadlineDate ){
 	
 		req.setAssessment(assess);
 		if (dev!=null) req.setDev(dev);
 		if (priority!=null) req.setPriority(priority);
+		if (deadlineDate!=null)req.setDeadlineDate(deadlineDate);
 		return req;
 	}
 	

@@ -6,7 +6,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
+import java.awt.TextField;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
@@ -23,6 +27,7 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 	private ButtonGroup priorityButtonGroup, approvalButtonGroup;
 	private JRadioButton btnPriorityHigh, btnPriorityMedium, btnPriorityLow, btnAccepted, btnRejected;
 	private JButton btnBack, btnSave;
+	private JTextField txtDate;
 	
 	public GUIAssessChange() {
 	}
@@ -109,7 +114,6 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 			cp.add(btnPriorityMedium);
 			cp.add(btnPriorityLow);
 			
-			
 
 			
 			// Setup the developers combo box
@@ -127,7 +131,14 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 		    developers.setSelectedIndex(-1);
 		    developers.addActionListener(this);
 			cp.add(developers);
+
+			// Completion Date
+			cp.add(createHeader("Completion Date: dd/mm/yyyy"));
+			txtDate = new JTextField();
+			txtDate.setPreferredSize(new Dimension(100, txtDate.getPreferredSize().height));
 			
+			cp.add(txtDate);
+
 			cp.add(createHeader(" "));
 
 			// Create back button
@@ -146,7 +157,7 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 			this.btnPriorityMedium.setEnabled(false);
 			this.btnPriorityLow.setEnabled(false);
 			this.developers.setEnabled(false);
-			
+			this.txtDate.setEnabled(false);
 	}
 	
 	public JLabel createHeader(String title){
@@ -177,12 +188,14 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 			this.btnPriorityMedium.setEnabled(true);
 			this.btnPriorityLow.setEnabled(true);
 			this.developers.setEnabled(true);
+			this.txtDate.setEnabled(true);
 		}
 		if (e.getSource() == this.btnRejected) {
 			this.btnPriorityHigh.setEnabled(false);
 			this.btnPriorityMedium.setEnabled(false);
 			this.btnPriorityLow.setEnabled(false);
 			this.developers.setEnabled(false);
+			this.txtDate.setEnabled(false);
 		}
 		
 		if (e.getSource() == this.btnBack) {
@@ -227,7 +240,7 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 				String priority=null;
 				String approval;
 				Developer developer=null;
-				
+				Date deadlineDate = null;
 				request.print();
 				
 				if (btnAccepted.isSelected()) {
@@ -244,6 +257,14 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 						priority = ChangeRequest.PRIORITY_LOW;
 					}
 
+				    SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/yyyy");
+				    
+				    try {
+						deadlineDate = dformat.parse(txtDate.getText());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					} 
+					
 					approval = ChangeRequest.ASSESSMENT_APPROVED;
 
 				}else {
@@ -251,9 +272,10 @@ public class GUIAssessChange extends JFrame implements ActionListener, ListDataL
 
 				}
 				
-				controller.approveChangeRequest(request, developer, approval, priority);
+				controller.approveChangeRequest(request, developer, approval, priority, deadlineDate);
 
-				
+				//testing
+				request.print();
 				
 				Container cp = this.getContentPane();
 				for (Component c : cp.getComponents()) {
