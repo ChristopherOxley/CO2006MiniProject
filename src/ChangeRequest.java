@@ -12,6 +12,7 @@ public class ChangeRequest implements Serializable {
 	private String assessment = null;
 	private String priority = null;
 	private Developer dev;
+	private Date deadlineDate;
 	private Date completionDate;
 	
 	public static final String PRIORITY_HIGH = "High";
@@ -93,6 +94,11 @@ public class ChangeRequest implements Serializable {
 		}else{
 			System.out.println("Assigned to Developer: Not Assigned");
 		}
+		if (this.deadlineDate == null){
+			System.out.println("No Deadline Set");
+		}else{
+			System.out.println("Deadline: "+ this.deadlineDate.toString());
+		}
 		if (this.completionDate == null) {
 			System.out.println("Not Completed");
 		}else {
@@ -129,6 +135,14 @@ public class ChangeRequest implements Serializable {
 
 	public void setCompletionDate(Date completionDate) {
 		this.completionDate = completionDate;
+	}
+
+	public Date getDeadlineDate() {
+		return deadlineDate;
+	}
+
+	public void setDeadlineDate(Date deadlineDate) {
+		this.deadlineDate = deadlineDate;
 	}
 	
 	
